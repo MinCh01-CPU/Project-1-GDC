@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
         //Recommend di chuyen theo WASD vì di chuyển theo chuột dễ chơi quá
 
+
         //Gioi han di chuyen cua nguoi choi o ria man hinh
         float clamedX = Mathf.Clamp(transform.position.x, -screenBounds.x, screenBounds.x);
         float clamedY = Mathf.Clamp(transform.position.y, -screenBounds.y, screenBounds.y);

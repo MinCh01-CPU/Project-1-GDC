@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour
 {
-    public float enemySpeed;
+    public static Enemy_AI enemy_AI;
+    public float enemySpeed, enemyChasingSpeed;
+    public float distance;
     public float detectDistance;
+    
+    private Vector3 movementPoint;
     public Transform playerPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,11 +18,21 @@ public class Enemy_AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {    
-        float distance = Vector3.Distance(transform.position, playerPosition.position);
+        distance = Vector3.Distance(transform.position, playerPosition.position);
+        movementPoint = new Vector3(playerPosition.position.x, playerPosition.position.y, transform.position.z);
           
-        if (distance <= detectDistance)
-        transform.position = Vector3.MoveTowards(transform.position, playerPosition.position, enemySpeed * Time.deltaTime );
+        if (DetectPlayer())
+        {
+            transform.position = Vector3.MoveTowards(transform.position, movementPoint, enemyChasingSpeed * Time.deltaTime );
+        }
         else transform.position += Vector3.down * enemySpeed * Time.deltaTime;
     }
+   public bool DetectPlayer()
+   {
+    if (distance <= detectDistance && transform.position.y >= playerPosition.position.y)
+    return true;
+    return false;
+   }
+
 }
 

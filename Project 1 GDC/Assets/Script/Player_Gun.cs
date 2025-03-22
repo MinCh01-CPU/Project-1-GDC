@@ -8,26 +8,22 @@ public class Player_Gun : MonoBehaviour
 
     public GameObject doubleBullet;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
-    {
-       shootCoolDown -= Time.deltaTime;
-       
-       if (Input.GetMouseButton(0) && shootCoolDown <= 0)
-       Shoot();
+    {  
+      if (Input.GetMouseButton(0) && shootCoolDown <= 0)
+      Shoot();
+      
+      shootCoolDown -= Time.deltaTime;
 
     }
     void Shoot()
-    {
-       //thay được bằng Object pooling thì sẽ tốt hơn
+    { 
+      doubleBullet = PBulletManager.pBulletManager.fireBullet();
+      doubleBullet.transform.position = transform.position;
+      doubleBullet.transform.rotation = transform.rotation;
+      doubleBullet.SetActive(true);
 
-       Instantiate(doubleBullet, transform.position, transform.rotation);
-       shootCoolDown = shootRate;
+      shootCoolDown = shootRate;
     }
+    
 }

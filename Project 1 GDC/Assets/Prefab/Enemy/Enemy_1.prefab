@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9693bc08ed6bee04891308ee7892b613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eBulletManager: {fileID: 0}
   singleBullet: {fileID: 0}
-  shootCoolDown: 0
-  shootRate: 1
+  shootRate: 2
 --- !u!1 &5133992260703638876
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,9 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 1
   enemyChasingSpeed: 3
-  distance: 0
   detectDistance: 6
-  playerPosition: {fileID: 0}
+  enemyHealth: 0
 --- !u!61 &3762640865909749425
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class PBulletManager : MonoBehaviour
 {
-    public static PBulletManager pBulletManager;
+    //Cái Script này dùng để tạo một loạt các viên đạn nằm chờ sẵn ở trong scene, ý tưởng ở đây là
+    //mình không tạo một viên đạn rồi xóa đi viên đạn đó nếu trúng mục tiêu hay đi quá xa, mà mình sẽ
+    //tạo sẵn các viên đạn trước rồi khi bắn, ta bật nó lên mà khi trúng thì ta tắt nó đi
+    
+    //Cái Script này dùng để quản lý các viên đạn của người chơi
     public GameObject playerBullet;
     public List<GameObject> playerBullets;
     public float storedBulletAmount;
-    void Awake()
-    {
-        pBulletManager = this;
-    }
-
+   
     void Start()
     {
         GameObject tmp;

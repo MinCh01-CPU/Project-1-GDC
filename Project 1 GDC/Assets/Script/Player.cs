@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         playerMovement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * playerSpeed * Time.deltaTime;
         transform.Translate(playerMovement);
 
-        //Gioi han di chuyen cua nguoi choi o ria man hinh
+        //Giới bạn di chuyển của người chơi ko đi qua rìa màn hình
         float clamedX = Mathf.Clamp(transform.position.x, -screenBounds.x, screenBounds.x);
         float clamedY = Mathf.Clamp(transform.position.y, -screenBounds.y, screenBounds.y);
         Vector3 Pos = transform.position;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         transform.position = Pos;
 
         if (playerHealth <= 0)
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); //Em để SetActive của Player về false chứ ko Destroy vì em chưa biết cách tối ưu code, mà để Destroy thì nó bị lỗi do Enemy cần Player vẫn còn trên scene để đọc vị trí
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

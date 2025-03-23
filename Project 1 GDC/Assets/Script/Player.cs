@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float playerSpeed;
+    public int playerHealth;
     Vector3 screenBounds;
     Vector3 playerMovement;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,9 +32,13 @@ public class Player : MonoBehaviour
         Pos.y = clamedY;
         transform.position = Pos;
 
+        if (playerHealth <= 0)
+        gameObject.SetActive(false);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("da va cham");
+        if (collision.CompareTag("Enemy Bullet"))
+        playerHealth -= 1;
     }
 }

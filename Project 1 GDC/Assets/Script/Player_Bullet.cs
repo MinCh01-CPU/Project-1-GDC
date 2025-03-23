@@ -10,4 +10,9 @@ public class Bullet : MonoBehaviour
 
         if (transform.position.y > 8) gameObject.SetActive(false);
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        gameObject.SetActive(false);
+    }
 }

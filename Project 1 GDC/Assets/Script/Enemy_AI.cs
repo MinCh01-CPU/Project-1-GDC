@@ -2,37 +2,43 @@ using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour
 {
-    public static Enemy_AI enemy_AI;
     public float enemySpeed, enemyChasingSpeed;
-    public float distance;
+    float distance;
     public float detectDistance;
+    public int enemyHealth;
     
     private Vector3 movementPoint;
-    public Transform playerPosition;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    Transform playerPosition;
     void Start()
     {
-        playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPosition = Game_Manager.Instance.Player.transform;
     }
 
-    // Update is called once per frame
     void Update()
     {    
         distance = Vector3.Distance(transform.position, playerPosition.position);
         movementPoint = new Vector3(playerPosition.position.x, playerPosition.position.y, transform.position.z);
           
-        if (DetectPlayer())
+        if (DetectPlayer() && Game_Manager.Instance.playerIsAlive() )
         {
             transform.position = Vector3.MoveTowards(transform.position, movementPoint, enemyChasingSpeed * Time.deltaTime );
         }
         else transform.position += Vector3.down * enemySpeed * Time.deltaTime;
+
+        if (enemyHealth <= 0)
+        gameObject.SetActive(false);
     }
-   public bool DetectPlayer()
+    bool DetectPlayer()
    {
     if (distance <= detectDistance && transform.position.y >= playerPosition.position.y)
     return true;
     return false;
    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player Bullet"))
+        enemyHealth -= 1;
+    }
 
 }
 

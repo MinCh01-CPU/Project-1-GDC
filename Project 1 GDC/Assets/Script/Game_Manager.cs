@@ -11,7 +11,7 @@ public class Game_Manager : MonoBehaviour
         Instance = this;
         else DestroyImmediate(gameObject);
 
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.FindGameObjectWithTag(Constant.PLAYER_TAG);
     }
     void OnDestroy()
     {

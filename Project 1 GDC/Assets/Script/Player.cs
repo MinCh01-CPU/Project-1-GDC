@@ -17,12 +17,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Cach di chuyen theo chuot
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(mousePos.x, mousePos.y, 0);
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //transform.position = new Vector3(mousePos.x, mousePos.y, 0);
 
         //Recommend di chuyen theo WASD vì di chuyển theo chuột dễ chơi quá
-        //playerMovement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * playerSpeed * Time.deltaTime;
-        //transform.Translate(playerMovement);
+        playerMovement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * playerSpeed * Time.deltaTime;
+        transform.Translate(playerMovement);
 
         //Gioi han di chuyen cua nguoi choi o ria man hinh
         float clamedX = Mathf.Clamp(transform.position.x, -screenBounds.x, screenBounds.x);
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("da va cham");
-        if (collision.CompareTag("Enemy Bullet"))
+        if (collision.CompareTag(Constant.Enemy_BULLET_TAG))
         playerHealth -= 1;
     }
 }

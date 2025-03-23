@@ -12,7 +12,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag(Constant.PLAYER_TAG))
         gameObject.SetActive(false);
     }
 }

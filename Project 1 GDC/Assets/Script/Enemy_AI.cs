@@ -36,7 +36,7 @@ public class Enemy_AI : MonoBehaviour
    }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player Bullet"))
+        if (collision.CompareTag(Constant.PLAYER_BULLET_TAG))
         enemyHealth -= 1;
     }
 

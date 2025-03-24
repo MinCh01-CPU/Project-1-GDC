@@ -10,7 +10,7 @@ public class Game_Manager : MonoBehaviour
     //ở đây em dùng nó như là một nơi trung gian để lưu vị trí của player
 
     public static Game_Manager Instance {get; private set; }
-    GameObject Player;
+    public GameObject Player;
 
     void Awake()
     {

@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Bullet_Pool
       objectReference: {fileID: 0}
+    - target: {fileID: 8833044509229365421, guid: adfef8ced17bcdc40a1a44480e529952, type: 3}
+      propertyPath: m_TagString
+      value: Player Bullet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -566,6 +570,10 @@ PrefabInstance:
     - target: {fileID: 8384997671742743005, guid: 91e1beb4474681148a360cc2589e0af4, type: 3}
       propertyPath: m_Name
       value: Enemy_Bullet_Pool
+      objectReference: {fileID: 0}
+    - target: {fileID: 8384997671742743005, guid: 91e1beb4474681148a360cc2589e0af4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy Bullet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

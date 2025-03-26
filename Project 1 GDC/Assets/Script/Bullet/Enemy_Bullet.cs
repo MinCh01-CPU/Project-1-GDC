@@ -1,11 +1,13 @@
 using UnityEngine;
-public class Player_Bullet : MonoBehaviour
+
+public class Enemy_Bullet : MonoBehaviour
 {
-    public float bulletSpeed; // Speed at which the bullet moves
+    private float bulletSpeed = 3f; // Speed at which the bullet moves
 
     void Update()
     {
-        transform.position += Vector3.up * bulletSpeed * Time.deltaTime; // Move the bullet upwards
+        transform.position += Vector3.down * bulletSpeed * Time.deltaTime; // Move the bullet downwards
+
         // Get the screen boundaries
         Vector3 screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
         Vector3 screenTopRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
@@ -17,17 +19,12 @@ public class Player_Bullet : MonoBehaviour
             Destroy(gameObject); // Destroy the bullet
         }
     }
-    // va chạm với enemy thì đạn sẽ bị hủy
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Constant.ENEMY_TAG)) // If the bullet collides with an enemy
+        if (collision.CompareTag(Constant.PLAYER_TAG)) // If the bullet collides with the player
         {
             Destroy(gameObject); // Destroy the bullet
         }
-    }
-
-    void OnBecameInvisible()
-    {
-        Destroy(gameObject); // Destroy the bullet when it goes off-screen
     }
 }

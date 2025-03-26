@@ -4,13 +4,13 @@ using System.Collections;
 public class Enemy1 : MonoBehaviour
 {
     // Script này dùng điền khiển hành vi của Enemy và máu của nó
-    public float enemySpeed, speeds; // tốc độ địch, tốc độ lúc đâm vào ng chơi
+    private float enemySpeed = 3f, speeds = 7f; // tốc độ địch, tốc độ lúc đâm vào ng chơi
 
     private Rigidbody2D rb; // Rigidbody của địch
     [SerializeField] private GameObject bullet;
-    public int enemyHealth; // máu của kẻ địch (để int)
+    private int enemyHealth = 100; // máu của kẻ địch (để int)
     private bool canShoot = true; // Flag to control shooting
-    public float shootCooldown = 1f; // Cooldown time between shots
+    private float shootCooldown = 1f; // Cooldown time between shots
     Transform playerPosition; // biến chứa vị trí của người chơi
     private Vector3 originalPosition; // Vị trí ban đầu của địch
     private bool isChasingPlayer = false; // Flag to control chasing behavior

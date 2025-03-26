@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8248562807685021833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5667343471714934018}
+  - component: {fileID: 7475762966715199097}
+  m_Layer: 0
+  m_Name: MapCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5667343471714934018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8248562807685021833}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.21, y: 8.62, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7475762966715199097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8248562807685021833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5484c66ced5bf44ae752514c8c65b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefabs:
+  - {fileID: 274992164617369519, guid: 52fa6b3924975444a989cbb443903c51, type: 3}
+  - {fileID: 6949434701377207391, guid: 2c04e68fde3632940bddbe69f8f891e4, type: 3}
+  - {fileID: 236635890813218999, guid: 08f6edb563dbe5945ad0bb6b7c644640, type: 3}
+  - {fileID: 6764129675527484718, guid: c1510542e21c66049aecfbf8f0bec31c, type: 3}
+  - {fileID: 6360287656136849770, guid: 0b59fa272dd5003429cf168a78d0243f, type: 3}
+  - {fileID: 3733867650063225963, guid: 7d76670699711a142a40289e161ad3da, type: 3}
+  - {fileID: 3951284360216569363, guid: e683bb88dfc56194ca63725ec648e7ed, type: 3}
+  - {fileID: 7090038359904089064, guid: 42d6388430d9ace4799424bd822299e6, type: 3}
+  generator: {fileID: 5667343471714934018}
+  cellsPerRow: 13
+  segmentWidth: 2
+  spawnOffset: 2
+  moveSpeed: 6
+  xOffset: -1.34
+  maxRows: 16
+  cleanupY: -20

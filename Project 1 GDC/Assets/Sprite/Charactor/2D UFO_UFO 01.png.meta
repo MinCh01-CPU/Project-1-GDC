@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e82d3b8bd81fe4d48bb2ee276039e902
+guid: afc7c36172b4a8e4699c4aac0d3245e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 570397081105278010
-    second: spaceShips_009_0
+      213: -573434357279457905
+    second: 2D UFO_UFO 01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spaceShips_009_0
+      name: 2D UFO_UFO 01_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 114
-        height: 82
+        x: 26
+        y: 24
+        width: 588
+        height: 307
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3423388f157ae700800000000000000
-      internalID: 570397081105278010
+      spriteID: f8d7a508d70ca08f0800000000000000
+      internalID: -573434357279457905
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      spaceShips_009_0: 570397081105278010
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

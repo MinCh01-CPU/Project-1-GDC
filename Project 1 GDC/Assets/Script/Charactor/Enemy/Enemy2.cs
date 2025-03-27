@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 public class Enemy2 : MonoBehaviour
 {
     // Script này dùng điền khiển hành vi của Enemy và máu của nó
@@ -16,6 +17,7 @@ public class Enemy2 : MonoBehaviour
     private Vector3 originalPosition; // Vị trí ban đầu của địch
     private bool isChasingPlayer = false; // Flag to control chasing behavior
     public Mau thanhMau;
+    private List<GameObject> bullets = new List<GameObject>(); // Danh sách quản lý các viên đạn
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -51,8 +53,8 @@ public class Enemy2 : MonoBehaviour
 
                 if (bullet != null)
                 {
-                    Instantiate(bullet, temp, Quaternion.identity);
-                    Debug.Log("Bullet instantiated");
+                    GameObject bulletInstance = Instantiate(bullet, temp, Quaternion.identity); // Tạo viên đạn
+                    bullets.Add(bulletInstance);
                 }
                 else
                 {
@@ -128,9 +130,14 @@ public class Enemy2 : MonoBehaviour
 
             if (enemyHealth <= 0)
             {
-                Debug.Log("Enemy is dead!");
+                foreach (GameObject bullet in bullets)
+                {
+                    if (bullet != null)
+                    {
+                        Destroy(bullet);
+                    }
+                }
 
-                // Gọi Enemy2_Manager để chuyển màn
                 if (Enemy2_Manager.Instance != null)
                 {
                     Enemy2_Manager.Instance.TriggerGameOver();
@@ -140,7 +147,7 @@ public class Enemy2 : MonoBehaviour
                     Debug.LogError("Enemy2_Manager instance is null!");
                 }
 
-                Destroy(gameObject); // Hủy đối tượng Enemy
+                Destroy(gameObject); // Destroy the enemy
             }
         }
     }

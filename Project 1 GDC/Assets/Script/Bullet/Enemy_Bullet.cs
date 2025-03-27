@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class Enemy_Bullet : MonoBehaviour
 {
-    private float bulletSpeed = 3f; // Speed at which the bullet moves
+    public float bulletSpeed; // Speed at which the bullet moves
 
+    void Start()
+    {
+        Time.timeScale = 1f;
+    }
     void Update()
     {
-        transform.position += Vector3.down * bulletSpeed * Time.deltaTime; // Move the bullet downwards
+        transform.position += Vector3.down * bulletSpeed * Time.unscaledDeltaTime; // Move the bullet downwards
 
         // Get the screen boundaries
         Vector3 screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));

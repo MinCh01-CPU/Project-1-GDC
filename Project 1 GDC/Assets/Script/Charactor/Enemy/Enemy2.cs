@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
-public class Enemy1 : MonoBehaviour
+public class Enemy2 : MonoBehaviour
 {
     // Script này dùng điền khiển hành vi của Enemy và máu của nó
     private float enemySpeed = 3f, speeds = 7f; // tốc độ địch, tốc độ lúc đâm vào ng chơi
@@ -23,6 +23,7 @@ public class Enemy1 : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         enemyHealth = enemyHealthMax; // Khởi tạo máu của địch  
         originalPosition = transform.position; // Lưu vị trí ban đầu của địch
         GameObject player = GameObject.FindWithTag("Player"); // Find the player GameObject by tag
@@ -131,9 +132,9 @@ public class Enemy1 : MonoBehaviour
                 Debug.Log("Enemy is dead!");
 
                 // Gọi Enemy_Manager để chuyển màn
-                if (Enemy_Manager.Instance != null)
+                if (Enemy2_Manager.Instance != null)
                 {
-                    Enemy_Manager.Instance.TriggerGameOver();
+                    Enemy2_Manager.Instance.TriggerGameOver();
                 }
                 else
                 {

@@ -73,20 +73,16 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag(Constant.Enemy_BULLET_TAG) || collision.CompareTag(Constant.ENEMY_TAG))
         {
-            GameOver();
-            gameObject.SetActive(false);
+            if (Game_Manager.Instance != null)
+            {
+                Game_Manager.Instance.TriggerGameOver();
+            }
+            else
+            {
+                Debug.LogError("GameManager instance is null! Ensure Game_Manager exists in the Scene.");
+            }
 
+            gameObject.SetActive(false); // Vô hiệu hóa Player
         }
-    }
-    void GameOver()
-    {
-        Debug.Log("Game Over");
-        StartCoroutine(DelayedGameOver());
-    }
-
-    IEnumerator DelayedGameOver()
-    {
-        yield return new WaitForSeconds(3f); // Đợi 3 giây
-        SceneManager.LoadScene(0); // Chuyển về Scene 0
     }
 }

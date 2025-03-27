@@ -8,7 +8,8 @@ public class Enemy1 : MonoBehaviour
 
     private Rigidbody2D rb; // Rigidbody của địch
     [SerializeField] private GameObject bullet;
-    private int enemyHealth = 50, enemyHealthMax = 50; // máu của kẻ địch (để int)
+    public int enemyHealthMax; // máu của kẻ địch (để int)
+    private int enemyHealth;
     private bool canShoot = true; // Flag to control shooting
     private float shootCooldown = 1f; // Cooldown time between shots
     Transform playerPosition; // biến chứa vị trí của người chơi
@@ -22,6 +23,7 @@ public class Enemy1 : MonoBehaviour
 
     void Start()
     {
+        enemyHealth = enemyHealthMax; // Khởi tạo máu của địch  
         originalPosition = transform.position; // Lưu vị trí ban đầu của địch
         GameObject player = GameObject.FindWithTag("Player"); // Find the player GameObject by tag
         if (player != null)

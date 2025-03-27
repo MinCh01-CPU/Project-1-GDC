@@ -1,16 +1,12 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
-    //Script này tạo ra một Singleton
-    //Singleton là mẫu thiết kế dùng để tạo ra duy nhất một Instance của cái Class này và cho phép truy cập nó từ mọi nơi
-    //thường dùng để lưu các dữ liệu quan trọng và toàn cục
-    //chi tiết phải tìm hiểu kỹ
-
-    //ở đây em dùng nó như là một nơi trung gian để lưu vị trí của player
-
     public static Game_Manager Instance { get; private set; }
     public GameObject Player;
+
     void Start()
     {
         if (Player == null)
@@ -26,24 +22,42 @@ public class Game_Manager : MonoBehaviour
             Player.SetActive(true);
         }
     }
+
     void Awake()
     {
-        if (Instance == null) //khúc này là để tạo Singleton nhằm đảm bảo chỉ có 1 instance duy nhất trong quá trình chạy,
-            Instance = this;      //mấy anh bở qua khúc này cũng được
-        else DestroyImmediate(gameObject);
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Debug.LogWarning("Another instance of Game_Manager already exists. Destroying this one.");
+            Destroy(gameObject); // Xóa đối tượng nhưng không ngay lập tức
+            return;
+        }
 
-        Player = GameObject.FindGameObjectWithTag(Constant.PLAYER_TAG); //tìm Player trên scene
+        Player = GameObject.FindGameObjectWithTag(Constant.PLAYER_TAG);
     }
+
     void OnDestroy()
     {
-        if (Instance == this) //khúc này cũng là tạo Singleton
+        if (Instance == this)
             Instance = null;
     }
 
     public bool playerIsAlive()
     {
-        if (Player.activeInHierarchy) //nếu Player active trên scene thì Player sống
-            return true;
-        else return false;
+        return Player.activeInHierarchy;
+    }
+
+    public void TriggerGameOver()
+    {
+        Debug.Log("Game Over triggered!");
+        StartCoroutine(DelayedGameOver());
+    }
+
+    private IEnumerator DelayedGameOver()
+    {
+        yield return new WaitForSeconds(3f); // Đợi 3 giây
+        Debug.Log("Loading Scene 1...");
+        SceneManager.LoadScene(1); // Chuyển về Scene 1
     }
 }

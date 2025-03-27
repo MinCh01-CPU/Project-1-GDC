@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Enemy_Manager : MonoBehaviour
+public class Enemy1_Manager : MonoBehaviour
 {
-    public static Enemy_Manager Instance { get; private set; }
+    public static Enemy1_Manager Instance { get; private set; }
     public GameObject Enemy;
 
     void Start()
@@ -13,7 +13,7 @@ public class Enemy_Manager : MonoBehaviour
         {
             Enemy = GameObject.FindGameObjectWithTag(Constant.ENEMY_TAG);
             if (Enemy == null)
-                Debug.LogError("Enemy_Manager: Enemy not found!");
+                Debug.LogError("Enemy1_Manager: Enemy not found!");
         }
 
         if (!Enemy.activeInHierarchy)
@@ -29,7 +29,7 @@ public class Enemy_Manager : MonoBehaviour
             Instance = this;
         else
         {
-            Debug.LogWarning("Another instance of Enemy_Manager already exists. Destroying this one.");
+            Debug.LogWarning("Another instance of Enemy1_Manager already exists. Destroying this one.");
             Destroy(gameObject); // Xóa đối tượng nhưng không ngay lập tức
             return;
         }

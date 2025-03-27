@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
-public class Enemy : MonoBehaviour
+public class Enemy2 : MonoBehaviour
 {
     // Script này dùng điền khiển hành vi của Enemy và máu của nó
     private float enemySpeed = 3f, speeds = 7f; // tốc độ địch, tốc độ lúc đâm vào ng chơi
@@ -130,14 +130,14 @@ public class Enemy : MonoBehaviour
             {
                 Debug.Log("Enemy is dead!");
 
-                // Gọi Enemy_Manager để chuyển màn
-                if (Enemy_Manager.Instance != null)
+                // Gọi Enemy2_Manager để chuyển màn
+                if (Enemy2_Manager.Instance != null)
                 {
-                    Enemy_Manager.Instance.TriggerGameOver();
+                    Enemy2_Manager.Instance.TriggerGameOver();
                 }
                 else
                 {
-                    Debug.LogError("Enemy_Manager instance is null!");
+                    Debug.LogError("Enemy2_Manager instance is null!");
                 }
 
                 Destroy(gameObject); // Hủy đối tượng Enemy

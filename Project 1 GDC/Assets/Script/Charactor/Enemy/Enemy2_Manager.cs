@@ -13,7 +13,7 @@ public class Enemy2_Manager : MonoBehaviour
         {
             Enemy = GameObject.FindGameObjectWithTag(Constant.ENEMY_TAG);
             if (Enemy == null)
-                Debug.LogError("Enemy_Manager: Enemy not found!");
+                Debug.LogError("Enemy2_Manager: Enemy not found!");
         }
 
         if (!Enemy.activeInHierarchy)
@@ -29,7 +29,7 @@ public class Enemy2_Manager : MonoBehaviour
             Instance = this;
         else
         {
-            Debug.LogWarning("Another instance of Enemy_Manager already exists. Destroying this one.");
+            Debug.LogWarning("Another instance of Enemy2_Manager already exists. Destroying this one.");
             Destroy(gameObject); // Xóa đối tượng nhưng không ngay lập tức
             return;
         }

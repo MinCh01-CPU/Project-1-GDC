@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     Vector3 screenBounds;
     Vector3 playerMovement;
     private Rigidbody2D rb;
+    //public Audio_Manager audioManager;
     [SerializeField] private GameObject bullet;
     private bool canShoot = true; // Flag to control shooting
     private float shootCooldown = 0.2f; // Cooldown time between shots
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        //audioManager = GameObject.FindWithTag(Constant.AUDIO_TAG).GetComponent<Audio_Manager>();
     }
 
     void Start()
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour
             // Đạn ko xoay
             canShoot = false; // Set canShoot to false to prevent continuous shooting
             StartCoroutine(ShootCooldown()); // Start cooldown coroutine
+            //audioManager.PlaySfx(audioManager.shootClip);
         }
         else if (canShoot && (!Input.GetKeyDown(KeyCode.Space)) && Input.GetMouseButtonDown(0)) // Check for space key or left mouse button
         {
@@ -70,8 +73,23 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Constant.Enemy_BULLET_TAG) || collision.CompareTag(Constant.ENEMY_TAG))
+        if (collision.CompareTag(Constant.Enemy_BULLET_TAG))
         {
+            gameObject.SetActive(false); // Vô hiệu hóa Player
+            if (Game_Manager.Instance != null)
+            {
+                Game_Manager.Instance.TriggerGameOver();
+            }
+            else
+            {
+                Debug.LogError("GameManager instance is null! Ensure Game_Manager exists in the Scene.");
+            }
+
+            gameObject.SetActive(false); // Vô hiệu hóa Player
+        }
+        else if (collision.CompareTag(Constant.ENEMY_TAG))
+        {
+            //audioManager.PlaySfx(audioManager.collideClip);
             gameObject.SetActive(false); // Vô hiệu hóa Player
             if (Game_Manager.Instance != null)
             {

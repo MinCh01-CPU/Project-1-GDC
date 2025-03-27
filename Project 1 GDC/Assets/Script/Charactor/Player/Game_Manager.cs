@@ -12,13 +12,10 @@ public class Game_Manager : MonoBehaviour
         if (Player == null)
         {
             Player = GameObject.FindGameObjectWithTag(Constant.PLAYER_TAG);
-            if (Player == null)
-                Debug.LogError("Game_Manager: Player not found!");
         }
 
         if (!Player.activeInHierarchy)
         {
-            Debug.LogWarning("Player is inactive! Re-enabling.");
             Player.SetActive(true);
         }
     }
@@ -29,7 +26,6 @@ public class Game_Manager : MonoBehaviour
             Instance = this;
         else
         {
-            Debug.LogWarning("Another instance of Game_Manager already exists. Destroying this one.");
             Destroy(gameObject); // Xóa đối tượng nhưng không ngay lập tức
             return;
         }
@@ -50,14 +46,12 @@ public class Game_Manager : MonoBehaviour
 
     public void TriggerGameOver()
     {
-        Debug.Log("Game Over triggered!");
         StartCoroutine(DelayedGameOver());
     }
 
     private IEnumerator DelayedGameOver()
     {
         yield return new WaitForSeconds(3f); // Đợi 3 giây
-        Debug.Log("Loading Scene 1...");
         SceneManager.LoadScene(1); // Chuyển về Scene 1
     }
 }

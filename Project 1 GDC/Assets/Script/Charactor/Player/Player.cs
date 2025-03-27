@@ -91,11 +91,6 @@ public class Player : MonoBehaviour
             {
                 Game_Manager.Instance.TriggerGameOver();
             }
-            else
-            {
-                Debug.LogError("GameManager instance is null! Ensure Game_Manager exists in the Scene.");
-            }
-
             gameObject.SetActive(false); // Vô hiệu hóa Player
         }
         else if (collision.CompareTag(Constant.ENEMY_TAG))
@@ -109,11 +104,6 @@ public class Player : MonoBehaviour
             {
                 Game_Manager.Instance.TriggerGameOver();
             }
-            else
-            {
-                Debug.LogError("GameManager instance is null! Ensure Game_Manager exists in the Scene.");
-            }
-
             gameObject.SetActive(false); // Vô hiệu hóa Player
         }
     }

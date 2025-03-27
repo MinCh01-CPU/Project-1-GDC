@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     Vector3 screenBounds;
     Vector3 playerMovement;
     private Rigidbody2D rb;
-    //public Audio_Manager audioManager;
+    private Audio_Manager audioManager; // Tham chiếu đến Audio_Manager
     [SerializeField] private GameObject bullet;
     private bool canShoot = true; // Flag to control shooting
     private float shootCooldown = 0.2f; // Cooldown time between shots
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        //audioManager = GameObject.FindWithTag(Constant.AUDIO_TAG).GetComponent<Audio_Manager>();
+        audioManager = GameObject.FindWithTag(Constant.AUDIO_TAG).GetComponent<Audio_Manager>();
     }
 
     void Start()
@@ -39,7 +39,10 @@ public class Player : MonoBehaviour
             // Đạn ko xoay
             canShoot = false; // Set canShoot to false to prevent continuous shooting
             StartCoroutine(ShootCooldown()); // Start cooldown coroutine
-            //audioManager.PlaySfx(audioManager.shootClip);
+            if (audioManager != null)
+            {
+                audioManager.PlaySfx(audioManager.shootClip);
+            }
         }
         else if (canShoot && (!Input.GetKeyDown(KeyCode.Space)) && Input.GetMouseButtonDown(0)) // Check for space key or left mouse button
         {
@@ -47,6 +50,10 @@ public class Player : MonoBehaviour
             // Đạn ko xoay
             canShoot = false; // Set canShoot to false to prevent continuous shooting
             StartCoroutine(ShootCooldown()); // Start cooldown coroutine
+            if (audioManager != null)
+            {
+                audioManager.PlaySfx(audioManager.shootClip);
+            }
         }
     }
     // Delay bullet
@@ -75,6 +82,10 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag(Constant.Enemy_BULLET_TAG))
         {
+            if (audioManager != null)
+            {
+                audioManager.PlaySfx(audioManager.shootClip);
+            }
             gameObject.SetActive(false); // Vô hiệu hóa Player
             if (Game_Manager.Instance != null)
             {
@@ -89,7 +100,10 @@ public class Player : MonoBehaviour
         }
         else if (collision.CompareTag(Constant.ENEMY_TAG))
         {
-            //audioManager.PlaySfx(audioManager.collideClip);
+            if (audioManager != null)
+            {
+                audioManager.PlaySfx(audioManager.collideClip);
+            }
             gameObject.SetActive(false); // Vô hiệu hóa Player
             if (Game_Manager.Instance != null)
             {

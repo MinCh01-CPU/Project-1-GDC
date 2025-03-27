@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag(Constant.Enemy_BULLET_TAG) || collision.CompareTag(Constant.ENEMY_TAG))
         {
+            gameObject.SetActive(false); // Vô hiệu hóa Player
             if (Game_Manager.Instance != null)
             {
                 Game_Manager.Instance.TriggerGameOver();

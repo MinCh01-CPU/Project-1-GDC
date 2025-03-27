@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using System.Collections;
-public class Enemy1 : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     // Script này dùng điền khiển hành vi của Enemy và máu của nó
     private float enemySpeed = 3f, speeds = 7f; // tốc độ địch, tốc độ lúc đâm vào ng chơi
@@ -25,7 +25,7 @@ public class Enemy1 : MonoBehaviour
     {
         enemyHealth = enemyHealthMax; // Khởi tạo máu của địch  
         originalPosition = transform.position; // Lưu vị trí ban đầu của địch
-        GameObject player = GameObject.FindWithTag("Player"); // Find the player GameObject by tag
+        GameObject player = GameObject.FindWithTag(Constant.PLAYER_TAG); // Find the player GameObject by tag
         if (player != null)
         {
             playerPosition = player.transform; // Get the player's transform

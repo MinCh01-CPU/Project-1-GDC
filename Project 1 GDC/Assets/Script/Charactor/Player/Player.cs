@@ -1,15 +1,16 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public float playerSpeed;
+    private float playerSpeed = 5f; // Tốc độ di chuyển của người chơi
     Vector3 screenBounds;
     Vector3 playerMovement;
     private Rigidbody2D rb;
     [SerializeField] private GameObject bullet;
     private bool canShoot = true; // Flag to control shooting
-    public float shootCooldown = 0.2f; // Cooldown time between shots
+    private float shootCooldown = 0.2f; // Cooldown time between shots
 
     void Awake()
     {
@@ -72,14 +73,20 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag(Constant.Enemy_BULLET_TAG) || collision.CompareTag(Constant.ENEMY_TAG))
         {
-            gameObject.SetActive(false);
             GameOver();
+            gameObject.SetActive(false);
+
         }
     }
     void GameOver()
     {
         Debug.Log("Game Over");
-        // Add your game over logic here, such as loading a game over scene or quitting the application
-        Application.Quit();
+        StartCoroutine(DelayedGameOver());
+    }
+
+    IEnumerator DelayedGameOver()
+    {
+        yield return new WaitForSeconds(3f); // Đợi 3 giây
+        SceneManager.LoadScene(0); // Chuyển về Scene 0
     }
 }

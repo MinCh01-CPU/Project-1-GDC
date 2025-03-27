@@ -8,13 +8,13 @@ public class Enemy1 : MonoBehaviour
 
     private Rigidbody2D rb; // Rigidbody của địch
     [SerializeField] private GameObject bullet;
-    private int enemyHealth = 100; // máu của kẻ địch (để int)
+    private int enemyHealth = 50, enemyHealthMax = 50; // máu của kẻ địch (để int)
     private bool canShoot = true; // Flag to control shooting
     private float shootCooldown = 1f; // Cooldown time between shots
     Transform playerPosition; // biến chứa vị trí của người chơi
     private Vector3 originalPosition; // Vị trí ban đầu của địch
     private bool isChasingPlayer = false; // Flag to control chasing behavior
-
+    public Mau thanhMau;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +32,7 @@ public class Enemy1 : MonoBehaviour
         {
             Debug.LogError("Player not found!");
         }
-
+        thanhMau.SetHealth(enemyHealth, enemyHealthMax);
         StartCoroutine(EnemyShoot()); // gọi hàm EnemyShoot để tạo ra đạn
         StartCoroutine(ChasePlayerRoutine()); // gọi hàm ChasePlayerRoutine để đuổi theo người chơi
     }
@@ -87,13 +87,20 @@ public class Enemy1 : MonoBehaviour
 
     void Update()
     {
+        if (enemyHealth <= 0)
+        {
+            if (thanhMau != null)
+            {
+                thanhMau.SetHealth(0, enemyHealthMax); // Cập nhật thanh máu trước khi tắt Enemy
+            }
+            Debug.Log("Enemy is dead!");
+            Destroy(gameObject); // Hủy đối tượng Enemy
+        }
+
         if (!isChasingPlayer)
         {
             Di_chuyen();
         }
-
-        if (enemyHealth <= 0)
-            gameObject.SetActive(false);
     }
 
     void Di_chuyen()
@@ -111,8 +118,18 @@ public class Enemy1 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Constant.PLAYER_BULLET_TAG)) //Nếu Enemy va chạm với đạn của người chơi thì bị trừ 1 máu
-            enemyHealth -= 1;
+        if (collision.CompareTag(Constant.PLAYER_BULLET_TAG))
+        { //Nếu Enemy va chạm với đạn của người chơi thì bị trừ 1 máu
+            enemyHealth = Mathf.Max(0, enemyHealth - 1); // Đảm bảo enemyHealth không âm
+            thanhMau.SetHealth(enemyHealth, enemyHealthMax);
+            Debug.Log("Enemy health: " + enemyHealth);
+
+            if (enemyHealth <= 0)
+            {
+                Debug.Log("Enemy is dead!");
+                Destroy(gameObject); // Hủy đối tượng Enemy
+            }
+        }
     }
 
 }

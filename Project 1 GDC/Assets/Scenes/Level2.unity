@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 965490839376715589, guid: d5a2e03a559f12444ab1ef99d5dbf9ed, type: 3}
-  enemyHealthMax: 100
+  enemyHealthMax: 150
   thanhMau: {fileID: 1127065665}
 --- !u!50 &1232015831
 Rigidbody2D:

@@ -5,7 +5,7 @@ public class PowerUp : MonoBehaviour
     public enum PowerUpType { DoubleBullet } // Loại vật phẩm
     public PowerUpType powerUpType; // Loại vật phẩm hiện tại
     public float fallSpeed = 3f; // Tốc độ rơi của vật phẩm
-    public float doubleBulletDuration = 5f; // Thời gian hiệu ứng x2 đạn
+    public float doubleBulletDuration = 7f; // Thời gian hiệu ứng x2 đạn
 
     void Update()
     {

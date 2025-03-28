@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2456988951049614420, guid: 583e927c26a0fc243805d5833e2a6811, type: 3}
-  enemyHealthMax: 50
+  enemyHealthMax: 100
   thanhMau: {fileID: 1152511214}
 --- !u!61 &78034304
 BoxCollider2D:

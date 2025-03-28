@@ -455,6 +455,10 @@ PrefabInstance:
       propertyPath: Enemy
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6974853526670118077, guid: c65d83d89c8cff64da443693e28f29bf, type: 3}
+      propertyPath: sceneToLoad
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8931708910496227964, guid: c65d83d89c8cff64da443693e28f29bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.99032
@@ -788,7 +792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868353102104300442, guid: 5ea83d43e9d25e648a6ea63b03c90806, type: 3}
       propertyPath: m_Name
-      value: Game_Manager
+      value: Player_Manager
       objectReference: {fileID: 0}
     - target: {fileID: 7635992647047485860, guid: 5ea83d43e9d25e648a6ea63b03c90806, type: 3}
       propertyPath: Player

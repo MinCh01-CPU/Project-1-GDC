@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// Quản lý âm thanh nhạc nền trong menu
 public class Audio_Menu : MonoBehaviour
 {
     public AudioSource musicAudioSource;

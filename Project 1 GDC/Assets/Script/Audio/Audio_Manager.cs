@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// Quản lý âm thanh trong Level1 và Level2
 public class Audio_Manager : MonoBehaviour
 {
 
@@ -8,7 +8,6 @@ public class Audio_Manager : MonoBehaviour
     public AudioClip collideClip; // tiếng va chạm
     public AudioClip meteoriteClip; // tiếng thiên thạch rơi
 
-    // Update is called once per frame
     public void PlaySfx(AudioClip clip)
     {
         if (clip != null)

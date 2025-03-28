@@ -2,12 +2,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class Enemy2 : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     // Script này dùng điền khiển hành vi của Enemy và máu của nó
-    private float enemySpeed = 3f, speeds = 7f; // tốc độ địch, tốc độ lúc đâm vào ng chơi
+    private float enemySpeed = 3f, chaseSpeed = 7f; // tốc độ địch, tốc độ lúc đâm vào ng chơi
 
-    private Rigidbody2D rb; // Rigidbody của địch
     [SerializeField] private GameObject bullet;
     public int enemyHealthMax; // máu của kẻ địch (để int)
     private int enemyHealth;
@@ -18,34 +17,25 @@ public class Enemy2 : MonoBehaviour
     private bool isChasingPlayer = false; // Flag to control chasing behavior
     public Mau thanhMau;
     private List<GameObject> bullets = new List<GameObject>(); // Danh sách quản lý các viên đạn
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
     void Start()
     {
         enemyHealth = enemyHealthMax; // Khởi tạo máu của địch  
         originalPosition = transform.position; // Lưu vị trí ban đầu của địch
-        GameObject player = GameObject.FindWithTag(Constant.PLAYER_TAG); // Find the player GameObject by tag
+        GameObject player = GameObject.FindWithTag(Constant.PLAYER_TAG); // Tìm Player GameObject 
         if (player != null)
         {
-            playerPosition = player.transform; // Get the player's transform
+            playerPosition = player.transform; // Lấy vị trí của Player để bám theo
         }
-        else
-        {
-            Debug.LogError("Player not found!");
-        }
-        thanhMau.SetHealth(enemyHealth, enemyHealthMax);
+        thanhMau.SetHealth(enemyHealth, enemyHealthMax); // Cập nhật thanh máu của địch
         StartCoroutine(EnemyShoot()); // gọi hàm EnemyShoot để tạo ra đạn
         StartCoroutine(ChasePlayerRoutine()); // gọi hàm ChasePlayerRoutine để đuổi theo người chơi
     }
-
+    // Bắn đạn
     IEnumerator EnemyShoot()
     {
         while (true)
         {
-            yield return new WaitForSeconds(shootCooldown);
+            yield return new WaitForSeconds(shootCooldown); // Chờ 1 khoảng thời gian để có thể bắn tiếp
             if (canShoot && playerPosition != null)
             {
                 Vector3 temp = transform.position;
@@ -56,10 +46,6 @@ public class Enemy2 : MonoBehaviour
                     GameObject bulletInstance = Instantiate(bullet, temp, Quaternion.identity); // Tạo viên đạn
                     bullets.Add(bulletInstance);
                 }
-                else
-                {
-                    Debug.LogError("Bullet is NULL!");
-                }
             }
         }
     }
@@ -68,17 +54,19 @@ public class Enemy2 : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(10f, 15f));
+            yield return new WaitForSeconds(Random.Range(10f, 15f)); // Random từ 10 đến 15s thì địch sẽ lao về Người chơi
             if (playerPosition != null)
             {
                 Vector3 targetPosition = playerPosition.position; // Lưu vị trí hiện tại của người chơi
                 isChasingPlayer = true;
+                // Đuổi theo người chơi
                 while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, speeds * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, chaseSpeed * Time.deltaTime);
                     yield return null;
                 }
                 yield return new WaitForSeconds(1f); // Đợi 1 giây trước khi quay lại vị trí ban đầu
+                // Quay lại vị trí ban đầu
                 while (Vector3.Distance(transform.position, originalPosition) > 0.1f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, originalPosition, enemySpeed * Time.deltaTime);
@@ -97,7 +85,6 @@ public class Enemy2 : MonoBehaviour
             {
                 thanhMau.SetHealth(0, enemyHealthMax); // Cập nhật thanh máu trước khi tắt Enemy
             }
-            Debug.Log("Enemy is dead!");
             gameObject.SetActive(false);
         }
 
@@ -111,7 +98,6 @@ public class Enemy2 : MonoBehaviour
     {
         if (playerPosition == null)
         {
-            Debug.LogWarning("playerPosition is NULL! Enemy can't find Player.");
             return;
         }
 
@@ -119,15 +105,14 @@ public class Enemy2 : MonoBehaviour
         Vector3 targetPosition = new Vector3(playerPosition.position.x, transform.position.y, transform.position.z);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, enemySpeed * Time.deltaTime);
     }
-
+    // Xử lý va chạm
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(Constant.PLAYER_BULLET_TAG))
         { //Nếu Enemy va chạm với đạn của người chơi thì bị trừ 1 máu
             enemyHealth = Mathf.Max(0, enemyHealth - 1); // Đảm bảo enemyHealth không âm
             thanhMau.SetHealth(enemyHealth, enemyHealthMax);
-            Debug.Log("Enemy health: " + enemyHealth);
-
+            // Nếu Enemy chết thì các viên đạn vừa bắn của nó mà đang trong quá trình di chuyển sẽ bị hủy ngay lập tức
             if (enemyHealth <= 0)
             {
                 foreach (GameObject bullet in bullets)
@@ -138,16 +123,11 @@ public class Enemy2 : MonoBehaviour
                     }
                 }
 
-                if (Enemy2_Manager.Instance != null)
+                if (Enemy_Manager.Instance != null)
                 {
-                    Enemy2_Manager.Instance.TriggerGameOver();
+                    Enemy_Manager.Instance.Trigger();
                 }
-                else
-                {
-                    Debug.LogError("Enemy2_Manager instance is null!");
-                }
-
-                Destroy(gameObject); // Destroy the enemy
+                Destroy(gameObject);
             }
         }
     }

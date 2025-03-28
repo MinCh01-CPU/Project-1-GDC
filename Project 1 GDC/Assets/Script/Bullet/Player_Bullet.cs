@@ -1,37 +1,29 @@
 using UnityEngine;
+// Quản lý Đạn của player
 public class Player_Bullet : MonoBehaviour
 {
-    public float bulletSpeed; // Speed at which the bullet moves
+    public float bulletSpeed; // Tốc độ đạn
 
-    void Start()
-    {
-        Time.timeScale = 1f;
-    }
     void Update()
     {
-        transform.position += Vector3.up * bulletSpeed * Time.deltaTime; // Move the bullet upwards
-        // Get the screen boundaries
+        transform.position += Vector3.up * bulletSpeed * Time.deltaTime; // Cập nhật vị trí của Viên đạn khi di chuyển
+        // Tính kích thước của Màn hình
         Vector3 screenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
         Vector3 screenTopRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
 
-        // Check if the bullet has moved off the bottom of the screen
+        // Nếu đạn đi ra ngoài màn hình thì sẽ bị hủy
         if (transform.position.y < screenBottomLeft.y || transform.position.y > screenTopRight.y ||
             transform.position.x < screenBottomLeft.x || transform.position.x > screenTopRight.x)
         {
-            Destroy(gameObject); // Destroy the bullet
+            Destroy(gameObject); // Đạn bị hủy
         }
     }
-    // va chạm với enemy thì đạn sẽ bị hủy
+    // Khi đạn của người chơi va chạm với Địch
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Constant.ENEMY_TAG)) // If the bullet collides with an enemy
+        if (collision.CompareTag(Constant.ENEMY_TAG)) // Nếu đạn va chạm với Enemy ( Thông qua TAG )
         {
-            Destroy(gameObject); // Destroy the bullet
+            Destroy(gameObject); // Đạn bị hủy
         }
-    }
-
-    void OnBecameInvisible()
-    {
-        Destroy(gameObject); // Destroy the bullet when it goes off-screen
     }
 }

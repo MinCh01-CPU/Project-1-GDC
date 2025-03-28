@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// Quản lý vật phẩm, cái này nếu người chơi thu thập được thì sẽ nhân đôi đạn
 public class PowerUp : MonoBehaviour
 {
     public enum PowerUpType { DoubleBullet } // Loại vật phẩm

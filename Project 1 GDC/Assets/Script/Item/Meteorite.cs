@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// Quản lý thiên thạch
 public class Meteorite : MonoBehaviour
 {
     public float fallSpeed = 3f; // Tốc độ rơi của thiên thạch

@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject bullet;
     private bool canShoot = true; // Flag to control shooting
     private float shootCooldown = 0.2f; // Cooldown time between shots
+    private bool isDoubleBulletActive = false; // Trạng thái x2 đạn
 
     void Awake()
     {
@@ -23,7 +24,23 @@ public class Player : MonoBehaviour
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
     }
 
-    // Update is called once per frame
+    // Kích hoạt x2 đạn
+    public void ActivateDoubleBullet(float duration)
+    {
+        if (!isDoubleBulletActive)
+        {
+            isDoubleBulletActive = true;
+            StartCoroutine(DoubleBulletCoroutine(duration));
+        }
+    }
+
+    IEnumerator DoubleBulletCoroutine(float duration)
+    {
+        Debug.Log("Double bullet activated!");
+        yield return new WaitForSeconds(duration);
+        isDoubleBulletActive = false;
+        Debug.Log("Double bullet deactivated!");
+    }
     void Update()
     {
         Di_chuyen();
@@ -35,7 +52,17 @@ public class Player : MonoBehaviour
     {
         if (canShoot && Input.GetKeyDown(KeyCode.Space)) // Check for space key or left mouse button
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            if (isDoubleBulletActive)
+            {
+                // Bắn x2 đạn
+                Instantiate(bullet, transform.position + Vector3.left * 0.5f, Quaternion.identity);
+                Instantiate(bullet, transform.position + Vector3.right * 0.5f, Quaternion.identity);
+            }
+            else
+            {
+                // Bắn 1 đạn
+                Instantiate(bullet, transform.position, Quaternion.identity);
+            }
             // Đạn ko xoay
             canShoot = false; // Set canShoot to false to prevent continuous shooting
             StartCoroutine(ShootCooldown()); // Start cooldown coroutine
@@ -46,7 +73,17 @@ public class Player : MonoBehaviour
         }
         else if (canShoot && (!Input.GetKeyDown(KeyCode.Space)) && Input.GetMouseButtonDown(0)) // Check for space key or left mouse button
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            if (isDoubleBulletActive)
+            {
+                // Bắn x2 đạn
+                Instantiate(bullet, transform.position + Vector3.left * 0.2f, Quaternion.identity);
+                Instantiate(bullet, transform.position + Vector3.right * 0.2f, Quaternion.identity);
+            }
+            else
+            {
+                // Bắn 1 đạn
+                Instantiate(bullet, transform.position, Quaternion.identity);
+            }
             // Đạn ko xoay
             canShoot = false; // Set canShoot to false to prevent continuous shooting
             StartCoroutine(ShootCooldown()); // Start cooldown coroutine
@@ -82,10 +119,6 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag(Constant.Enemy_BULLET_TAG))
         {
-            if (audioManager != null)
-            {
-                audioManager.PlaySfx(audioManager.shootClip);
-            }
             gameObject.SetActive(false); // Vô hiệu hóa Player
             if (Game_Manager.Instance != null)
             {

@@ -321,6 +321,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4469514902295079980, guid: 74d6de404c4cc1a4887ae510f04932fe, type: 3}
+      propertyPath: doubleBulletPowerUpPrefab
+      value: 
+      objectReference: {fileID: 1727900654076546850, guid: d4d71be9c241f4b4388cba34af2e23e2, type: 3}
     - target: {fileID: 5273092095537822273, guid: 74d6de404c4cc1a4887ae510f04932fe, type: 3}
       propertyPath: m_Name
       value: Spawner

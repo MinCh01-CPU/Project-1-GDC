@@ -55,7 +55,7 @@ public class Enemy1_Manager : MonoBehaviour
 
     private IEnumerator DelayedGameOver()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(2);
     }
 }

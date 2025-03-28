@@ -51,7 +51,7 @@ public class Game_Manager : MonoBehaviour
 
     private IEnumerator DelayedGameOver()
     {
-        yield return new WaitForSeconds(3f); // Đợi 3 giây
+        yield return new WaitForSeconds(5f); // Đợi 5 giây
         SceneManager.LoadScene(1); // Chuyển về Scene 1
     }
 }

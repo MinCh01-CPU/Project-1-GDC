@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
             }
             gameObject.SetActive(false); // Vô hiệu hóa Player
         }
-        else if (collision.CompareTag(Constant.ENEMY_TAG))
+        else if (collision.CompareTag(Constant.ENEMY_TAG) || collision.CompareTag(Constant.METEORITE_TAG))
         {
             if (audioManager != null)
             {

@@ -329,6 +329,14 @@ PrefabInstance:
       propertyPath: m_text
       value: 100/100
       objectReference: {fileID: 0}
+    - target: {fileID: 1045469933501736665, guid: 95f4d5398cb074f438daf59104086cfd, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045469933501736665, guid: 95f4d5398cb074f438daf59104086cfd, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2437145192059998547, guid: 95f4d5398cb074f438daf59104086cfd, type: 3}
       propertyPath: m_Camera
       value: 
@@ -602,7 +610,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.7, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
